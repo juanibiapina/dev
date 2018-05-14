@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # Usage: dv open <name>
 # Summary: Opens a project for development
-# Help: Changes into the project directory and opens a tmux session named after that project
+# Help: Changes into the project directory and opens a tmux session named after
+# that project
+#
+# If a .dv-session file exists in the project directory, it will be used to
+# create the tmux session, otherwise a default session is created with an
+# editor and a terminal window.
 
 set -e
 
