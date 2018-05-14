@@ -14,13 +14,25 @@ if [ "$1" = "--complete" ]; then
   exit
 fi
 
-name="$1"
+dir="$1"
+name="${dir//./-}"
 
-cd "$HOME/development/$name"
+cd "$HOME/development/$dir"
 
-if [ -n "$TMUX" ]; then
-  tmux new-session -d -s "${name//./-}"
-  tmux switch-client -t "${name//./-}"
-else
-  tmux new-session -s "${name//./-}"
+source "${_DV_ROOT}/lib/tmux.sh"
+
+if initialize_session "$name"; then
+  session_file="$HOME/development/$dir/.dv-session"
+  if [ -f "$session_file" ]; then
+    source "$session_file"
+  else
+    new_window "nvim"
+    run_cmd "nvim"
+
+    new_window
+  fi
+
+  select_window 1
 fi
+
+finalize_and_go_to_session
