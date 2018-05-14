@@ -48,14 +48,14 @@ if [ -z "$print" ]; then
   { echo "# Load dv automatically by adding"
     echo "# the following to ${profile}:"
     echo
-    echo "eval \"\$(${_DEV_ROOT}/bin/dv init -)\""
+    echo "eval \"\$(${_DV_ROOT}/bin/dv init -)\""
     echo
   } >&2
 
   exit 1
 fi
 
-echo "export PATH=\"\${PATH}:${_DEV_ROOT}/bin\""
+echo "export PATH=\"\${PATH}:${_DV_ROOT}/bin\""
 
 case "$shell" in
 bash | zsh )
