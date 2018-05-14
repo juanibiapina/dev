@@ -26,12 +26,12 @@ export PATH="${libexec_path}:$PATH"
 command="$1"
 case "$command" in
 "" | "-h" | "--help" )
-  exec dev-help
+  exec dv-help
   ;;
 * )
-  command_path="$(command -v "dev-$command" || true)"
+  command_path="$(command -v "dv-$command" || true)"
   if [ ! -x "$command_path" ]; then
-    echo "dev: no such command \`$command'" >&2
+    echo "dv: no such command \`$command'" >&2
     exit 1
   fi
 

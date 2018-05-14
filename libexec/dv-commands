@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Usage: dev commands
-# Summary: List all dev commands
-# Help: This command is mostly used for autocompletion in various shells, and for `dev help`.
+# Usage: dv commands
+# Summary: List all dv commands
+# Help: This command is mostly used for autocompletion in various shells, and for `dv help`.
 # Also, this command helps find commands that are named the same as potentially builtin shell commands (which, cd, etc)
 
 set -e
 
-# Provide dev completions
+# Provide dv completions
 if [ "$1" = "--complete" ]; then
   echo --sh
   echo --no-sh
@@ -24,8 +24,8 @@ fi
 shopt -s nullglob
 
 { for path in ${PATH//:/$'\n'}; do
-    for command in "${path}/dev-"*; do
-      command="${command##*dev-}"
+    for command in "${path}/dv-"*; do
+      command="${command##*dv-}"
       if [ -n "$sh" ]; then
         if [ ${command:0:3} = "sh-" ]; then
           echo ${command##sh-}

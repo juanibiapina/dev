@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Usage: dev open <name>
+# Usage: dv open <name>
 # Summary: Opens a project for development
 # Help: Changes into the project directory and opens a tmux session named after that project
 
 set -e
 
-# provide dev completions
+# provide dv completions
 if [ "$1" = "--complete" ]; then
   for name in $HOME/development/*; do
     echo ${name##*/}

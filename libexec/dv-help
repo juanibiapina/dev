@@ -7,7 +7,7 @@ print_summaries() {
   local longest_command=0
   local command
 
-  for command in $(dev-commands); do
+  for command in $(dv-commands); do
     local file="$(command_path "$command")"
     if [ ! -h "$file" ]; then
       local summary="$(summary "$file")"
@@ -47,7 +47,7 @@ print_help() {
 }
 
 command_path() {
-  command -v "dev-$command" || command -v "dev-sh-$command" || true
+  command -v "dv-$command" || command -v "dv-sh-$command" || true
 }
 
 summary() {
@@ -74,20 +74,20 @@ truncate() {
   fi
 }
 
-# Provide dev completions
+# Provide dv completions
 if [ "$1" = "--complete" ]; then
-  exec "dev-commands"
+  exec "dv-commands"
   exit
 fi
 
 command="$1"
 case "$command" in
-"") echo "Usage: dev <command> [<args>]
+"") echo "Usage: dv <command> [<args>]
 
-Some useful dev commands are:
+Some useful dv commands are:
 $(print_summaries)
 
-See 'dev help <command>' for information on a specific command."
+See 'dv help <command>' for information on a specific command."
 ;;
 *)
   file="$(command_path "$command")"
@@ -95,7 +95,7 @@ See 'dev help <command>' for information on a specific command."
   if [ -n "$file" ]; then
     print_help "$file"
   else
-    echo "dev: no such command \`$command'" >&2
+    echo "dv: no such command \`$command'" >&2
     exit 1
   fi
 esac
