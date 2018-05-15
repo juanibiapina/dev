@@ -2,16 +2,16 @@ if [[ ! -o interactive ]]; then
     return
 fi
 
-compctl -K _dv dv
+compctl -K _dev dev
 
-_dv() {
+_dev() {
   local words completions
   read -cA words
 
   if [ "${#words}" -eq 2 ]; then
-    completions="$(dv commands)"
+    completions="$(dev commands)"
   else
-    completions="$(dv completions "${words[2,-2]}")"
+    completions="$(dev completions "${words[2,-2]}")"
   fi
 
   reply=("${(ps:\n:)completions}")

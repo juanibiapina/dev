@@ -45,28 +45,28 @@ if [ -z "$print" ]; then
     ;;
   esac
 
-  { echo "# Load dv automatically by adding"
+  { echo "# Load dev automatically by adding"
     echo "# the following to ${profile}:"
     echo
-    echo "eval \"\$(${_DV_ROOT}/bin/dv init -)\""
+    echo "eval \"\$(${_DEV_ROOT}/bin/dev init -)\""
     echo
   } >&2
 
   exit 1
 fi
 
-echo "export PATH=\"\${PATH}:${_DV_ROOT}/bin\""
+echo "export PATH=\"\${PATH}:${_DEV_ROOT}/bin\""
 
 case "$shell" in
 bash | zsh )
-  echo "source \"$root/completions/dv.${shell}\""
+  echo "source \"$root/completions/dev.${shell}\""
   ;;
 esac
 
-commands=(`dv commands --sh`)
+commands=(`dev commands --sh`)
 IFS="|"
 cat <<EOS
-_dv_wrapper() {
+_dev_wrapper() {
   local command="\$1"
   if [ "\$#" -gt 0 ]; then
     shift
@@ -74,9 +74,9 @@ _dv_wrapper() {
 
   case "\$command" in
   ${commands[*]})
-    eval \`dv "sh-\$command" "\$@"\`;;
+    eval \`dev "sh-\$command" "\$@"\`;;
   *)
-    command dv "\$command" "\$@";;
+    command dev "\$command" "\$@";;
   esac
 }
 EOS
@@ -86,9 +86,9 @@ EOS
 # fix both cases here by letting zsh have a function, and bash have its alias.
 case "$shell" in
 bash )
-  echo "alias dv=_dv_wrapper"
+  echo "alias dev=_dev_wrapper"
   ;;
 zsh )
-  echo "dv=_dv_wrapper"
+  echo "dev=_dev_wrapper"
   ;;
 esac
