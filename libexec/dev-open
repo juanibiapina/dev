@@ -31,8 +31,8 @@ if initialize_session "$name"; then
   if [ -f "$session_file" ]; then
     source "$session_file"
   else
-    new_window "nvim"
-    run_cmd "nvim"
+    new_window "editor"
+    run_cmd "$EDITOR"
 
     new_window
   fi
