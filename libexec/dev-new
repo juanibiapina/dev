@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Usage: dev new <name>
+# Summary: Create a new project
+# Help: Initialize a new project by creating the project directory and initializing
+# git. Then start work on this new project.
+
+set -e
+
+name="$1"
+dir="$HOME/development/$name"
+
+if [ -e "$dir" ]; then
+  echo "Project already exists"
+  exit 1
+fi
+
+mkdir "$dir"
+
+pushd "$dir"
+git init .
+popd
+
+dev open "$name"
