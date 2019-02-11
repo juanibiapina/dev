@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Usage: dev kill-session
+# Summary: Kill current tmux session without detaching
+
+set -e
+
+session="$(tmux display-message -p '#S')"
+
+tmux switch-client -l
+tmux kill-session -t "$session"
