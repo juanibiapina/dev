@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Usage: dev list
+# Summary: Lists local projects
+
+set -e
+
+for name in $HOME/development/*; do
+  echo ${name##*/}
+done
