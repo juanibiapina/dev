@@ -6,12 +6,10 @@
 #
 new_window() {
   if [ -n "$1" ]; then local winarg=(-n "$1"); fi
-  if [ -n "$2" ]; then local command=("$2"); fi
 
-  tmux new-window -t "$session:" "${winarg[@]}" "${command[@]}"
+  tmux new-window -t "$session:" "${winarg[@]}"
 
-  # Disable renaming if a window name was given.
-  if [ -n "$1" ]; then tmux set-option -t "$1" allow-rename off; fi
+  window="$(__get_current_window_index)"
 }
 
 # Split current window/pane vertically.
@@ -73,6 +71,7 @@ clock() {
 #
 select_window() {
   tmux select-window -t "$session:$1"
+  window="$(__get_current_window_index)"
 }
 
 # Select a specific pane in the current window.
@@ -129,7 +128,7 @@ synchronize_off() {
 #   - $2: (optional) Target pane ID to send input to.
 #
 send_keys() {
-  tmux send-keys -t "$session" "$1"
+  tmux send-keys -t "$session:$window.$2" "$1"
 }
 
 # Runs a shell command in the currently active pane/window.
@@ -139,8 +138,8 @@ send_keys() {
 #   - $2: (optional) Target pane ID to run command in.
 #
 run_cmd() {
-  send_keys "$1"
-  send_keys "C-m"
+  send_keys "$1" "$2"
+  send_keys "C-m" "$2"
 }
 
 # Create a new session, returning 0 on success, 1 on failure.
@@ -192,6 +191,15 @@ finalize_and_go_to_session() {
     tmux -u attach-session -t "$session:"
   else
     tmux -u switch-client -t "$session:"
+  fi
+}
+
+__get_current_window_index() {
+  local lookup=$(tmux list-windows -t "$session:" \
+    -F "#{window_active}:#{window_index}" 2>/dev/null | grep "^1:")
+
+  if [ -n "$lookup" ]; then
+    echo "${lookup/1:}"
   fi
 }
 
