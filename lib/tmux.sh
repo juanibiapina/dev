@@ -129,7 +129,7 @@ synchronize_off() {
 #   - $2: (optional) Target pane ID to send input to.
 #
 send_keys() {
-  tmux send-keys -t "$session:$window.$2" "$1"
+  tmux send-keys -t "$session" "$1"
 }
 
 # Runs a shell command in the currently active pane/window.
@@ -139,8 +139,8 @@ send_keys() {
 #   - $2: (optional) Target pane ID to run command in.
 #
 run_cmd() {
-  send_keys "$1" "$2"
-  send_keys "C-m" "$2"
+  send_keys "$1"
+  send_keys "C-m"
 }
 
 # Create a new session, returning 0 on success, 1 on failure.
