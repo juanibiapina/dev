@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
-# Usage: dev start <username/repo>
+#
 # Summary: Starts development in a project
-# Help: Clone a project locally and start a development session for it
+#
+# Usage: {cmd} <username/repo>
+#
+# Clone a project locally and start a development session for it.
 
 set -e
 
 project="$1"
 
+cd $HOME/development
 hub clone "$project"
 dev open "${project#*/}"

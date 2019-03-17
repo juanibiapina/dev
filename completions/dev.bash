@@ -5,8 +5,7 @@ _dev() {
   if [ "$COMP_CWORD" -eq 1 ]; then
     COMPREPLY=( $(compgen -W "$(dev commands)" -- "$word") )
   else
-    local command="${COMP_WORDS[1]}"
-    local completions="$(dev completions "$command")"
+    local completions="$(dev completions "${COMP_WORDS[@]:1}")"
     COMPREPLY=( $(compgen -W "$completions" -- "$word") )
   fi
 }

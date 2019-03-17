@@ -1,1 +1,5 @@
-../libexec/dev
+#!/usr/bin/env bash
+
+set -e
+
+sub --name dev --bin "${BASH_SOURCE[0]}" --relative ".." -- "$@"

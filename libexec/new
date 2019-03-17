@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Usage: dev new <name>
+#
 # Summary: Create a new project
-# Help: Initialize a new project by creating the project directory and initializing
+#
+# Usage: {cmd} <name>
+#
+# Initialize a new project by creating the project directory and initializing
 # git. Then start work on this new project.
 
 set -e

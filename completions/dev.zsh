@@ -9,9 +9,9 @@ _dev() {
   read -cA words
 
   if [ "${#words}" -eq 2 ]; then
-    completions="$(dev commands)"
+    completions="$(dev completions)"
   else
-    completions="$(dev completions "${words[2,-2]}")"
+    completions="$(dev completions "${words[@]:1:-1}")"
   fi
 
   reply=("${(ps:\n:)completions}")

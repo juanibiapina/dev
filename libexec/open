@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Usage: dev open <name>
+#
 # Summary: Opens a project for development
-# Help: Changes into the project directory and opens a tmux session named after
+#
+# Usage: {cmd} <name>
+#
+# Changes into the project directory and opens a tmux session named after
 # that project
 #
 # If a .dev-session file exists in the project directory, it will be used to
@@ -10,7 +13,7 @@
 
 set -e
 
-# provide dev completions
+# Provide completions
 if [ "$1" = "--complete" ]; then
   for name in $HOME/development/*; do
     echo ${name##*/}
