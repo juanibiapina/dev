@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Summary: Update all local repos from remote
+#
+# This runs a `git pull --rebase` on all local projects which don't have local
+# changes.
+
+cd "$HOME/development"
+
+for dir in */; do
+  (
+    cd $dir
+    if [ -z "$(git status --porcelain)" ]; then # Working directory clean
+      git pull --rebase
+    fi
+  )
+done
