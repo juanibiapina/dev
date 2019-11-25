@@ -11,4 +11,4 @@ repo="$(dev github repo)"
 encoded_repo="$(codon "$repo")"
 branch="$(git branch --show-current)"
 
-curl -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_TOKEN" "${url}/repo/${encoded_repo}/branch/${branch}" | jq "."
+curl --silent -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_TOKEN" "${url}/repo/${encoded_repo}/branch/${branch}" | jq "."
