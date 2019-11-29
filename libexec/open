@@ -15,7 +15,7 @@ set -e
 
 # Provide completions
 if [ "$1" = "--complete" ]; then
-  git workspace list
+  dev list
   exit
 fi
 
