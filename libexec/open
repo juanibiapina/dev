@@ -15,15 +15,17 @@ set -e
 
 # Provide completions
 if [ "$1" = "--complete" ]; then
-  dev list
+  for name in $HOME/development/*; do
+    echo ${name##*/}
+  done
+
   exit
 fi
 
 dir="$1"
-name="${dir##*/}"
-name="${name//./-}"
+name="${dir//./-}"
 
-cd "$HOME/workspace/$dir"
+cd "$HOME/development/$dir"
 
 source "${_DEV_ROOT}/lib/tmux.sh"
 

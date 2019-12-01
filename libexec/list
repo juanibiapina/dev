@@ -4,4 +4,6 @@
 
 set -e
 
-git workspace list
+for name in $HOME/development/*; do
+  echo ${name##*/}
+done
